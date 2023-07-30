@@ -23,50 +23,55 @@ public class passwordGenerator {
 // feedback on its complexity.
 
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("====================================");
-        System.out.println("Validation criteria for passwords are as follows:");
-        System.out.println("Minimum length of the password is 8");
-        System.out.println("At least one uppercase letter is required");
-        System.out.println("At least one lowercase letter is required");
-        System.out.println("At least one special character is required");
-        System.out.println("At least one digit is required");
-        System.out.println("====================================");
-        System.out.print("Enter your desired password: ");
-        String password = scanner.nextLine();
-
-        if (isValidPassword(password)) {
-            System.out.println("Password is valid: " + password);
-        } else {
-            System.out.println("Invalid password! Please make sure your password meets the requirements.");
+       System.out.println("<=======================000==========================>"); 
+       System.out.println("Validation criteria for passwords are as follows:"); 
+       System.out.println("Minimum length of the password is 8"); 
+       System.out.println("At least one uppercase letter is required"); 
+       System.out.println("At least one lowercase letter is required"); 
+       System.out.println("At least one special character is required"); 
+       System.out.println("At least one digit is required"); 
+       System.out.println("<=======================000==========================>"); 
+       System.out.print("Enter your desired password:"); 
+       Scanner scanner = new Scanner(System.in);
+       String password = scanner.nextLine();
+        if( validPassword(password)){
+            System.out.print("Password Generated Successfully"); 
         }
-
         scanner.close();
     }
 
-    private static boolean isValidPassword(String password) {
-        int minLength = 8; 
-        boolean isUppercase = false; 
-        boolean isLowercase = false; 
-        boolean isSpecialCharacter = false; 
-        boolean isNumber = false; 
-
-        for (char ch : password.toCharArray()) {
+    public static boolean validPassword(String password){
+        int passwordLength = 8;
+        boolean isUpperCase = false;
+        boolean isLowerCase = false;
+        boolean isSpecialCharacter = false;
+        boolean isNumber = false;
+        for(char ch: password.toCharArray()){
             if (Character.isUpperCase(ch)) {
-                isUppercase = true;
-            } else if (Character.isLowerCase(ch)) {
-                isLowercase = true;
-            } else if (Character.isDigit(ch)) {
+                isUpperCase = true;
+            }else if(Character.isLowerCase(ch)){
+                isLowerCase = true;
+            }else if(Character.isDigit(ch)){
                 isNumber = true;
-            } else if (isSpecialCharacter(ch)) {
+            }else if(isSpecialCharacter(ch)) {
                 isSpecialCharacter = true;
             }
         }
+        if(password.length() <= passwordLength){
+            System.out.println("Minimum length of the password is 8"); 
+        } if(!isUpperCase){
+            System.out.println("At least one uppercase letter is required"); 
+        } if(!isLowerCase){
+            System.out.println("At least one lowercase letter is required"); 
+        } if(!isSpecialCharacter){
+            System.out.println("At least one special character is required"); 
+        } if(!isNumber){
+            System.out.println("At least one digit is required"); 
+        }
 
-        return password.length() >= minLength && isUppercase && isLowercase && isSpecialCharacter && isNumber;
+        return password.length() >= passwordLength && isUpperCase && isLowerCase && isSpecialCharacter && isNumber;
     }
-
-    private static boolean isSpecialCharacter(char ch) {
+    public static boolean isSpecialCharacter(char ch ){
         String specialCharacters = "!@#$%^&*()_+{}[]|:;<>,.?/~`";
         return specialCharacters.indexOf(ch) != -1;
     }
